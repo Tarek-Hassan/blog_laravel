@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Repository\PostRepository;
 use App\Http\Repository\UserRepository;
 use Illuminate\Http\Request;
-// use Carbon\Carbon;
+use App\Http\Requests\PostRequest;
+use Carbon\Carbon;
 
 //  this class use RepositoryPattern
 
@@ -21,6 +22,7 @@ class PostController extends Controller
     
     public function index(){
         //NumberOfElementPerPage
+
         $limit=10;
         $posts=$this->postModel->paginateAll($limit);
         return view('posts.index',compact('posts','current','current1'));
@@ -35,7 +37,20 @@ class PostController extends Controller
                 return view('posts.create',compact('users'));
             }
         
-            public function store(Request $request) {
+            public function store(PostRequest $request) {
+                // $validatedData = $request->validate([
+                // $validatedData = $request->validateWithBag('post',[
+                //     'title' => 'required|min:5',
+                //     'describtion' => 'required|min:6',
+                //     'user_id' => 'required',
+                // ],[
+                //     'title.min'=>'title more than 3  char',
+                //     'title.required'=>'title not be empty',
+                //     'describtion.required'=>'describtion not be empty',
+                //     'describtion.min'=>'describtion more than 6  char',
+
+                // ]);
+
                 $posts=$this->postModel->create($request->all());
         
                 // dd($request->all());
@@ -48,7 +63,7 @@ class PostController extends Controller
                 return view('posts.edit', compact('post','users'));
             }
         
-            public function update(Request $request,$id) {
+            public function update(PostRequest $request,$id) {
                 $posts =$this->postModel->update($id,$request->all());  
                 return redirect()->route('Posts.index');
             }
