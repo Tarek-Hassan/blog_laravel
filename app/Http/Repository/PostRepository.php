@@ -26,6 +26,9 @@ class PostRepository implements RepositoryInterface{
     public function find(string $id){
         return $this->model->findOrFail($id);
     }
+    public function check(string $id){
+        return $this->model->where('id',$id)->first();
+    }
     public function update(string $id, array $model){
         $modelToUpdate = $this->model->find($id);
         $modelToUpdate->update($model);

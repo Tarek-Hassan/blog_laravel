@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <h2>ALLPosts</h2>
   <p>The .table-striped class adds zebra-stripes to a table:</p>            
   <button class="btn btn-success"><a href='{{route("posts.create")}}'>AddPost</a></button>
@@ -9,6 +18,7 @@
       <tr>
         <th>id</th>
         <th>title</th>
+        <th>slug</th>
         <th>describtion</th>
         <th>user</th>
         <th>createdAt</th>
@@ -20,6 +30,7 @@
       <tr>
         <td>{{$post->id}}</td>
         <td>{{$post->title}}</td>
+        <td>{{$post->slug}}</td>
         <td>{{$post->describtion}}</td>
         <td>{{$post->user?$post->user->name:'non'}}</td>
         <td>{{$post->created_at->format('Y-m-d')}}</td>

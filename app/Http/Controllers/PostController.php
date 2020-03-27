@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Repository\PostRepository;
 use App\Http\Repository\UserRepository;
 use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Carbon\Carbon;
 
 //  this class use RepositoryPattern
@@ -37,35 +38,34 @@ class PostController extends Controller
                 return view('posts.create',compact('users'));
             }
         
-            public function store(PostRequest $request) {
-                // $validatedData = $request->validate([
-                // $validatedData = $request->validateWithBag('post',[
-                //     'title' => 'required|min:5',
-                //     'describtion' => 'required|min:6',
-                //     'user_id' => 'required',
-                // ],[
-                //     'title.min'=>'title more than 3  char',
-                //     'title.required'=>'title not be empty',
-                //     'describtion.required'=>'describtion not be empty',
-                //     'describtion.min'=>'describtion more than 6  char',
-
-                // ]);
-
+            public function store(StorePostRequest $request) {
+             
                 $posts=$this->postModel->create($request->all());
-        
-                // dd($request->all());
                 return redirect()->route('Posts.index');
             }
         
             public function edit(string $id) {
-                $post=$this->postModel->find($id);
-                $users=$this->UserModel->all();
-                return view('posts.edit', compact('post','users'));
+
+                $checkId=$this->postModel->check($id);
+                if($checkId){
+                    $post=$this->postModel->check($id);
+                    $users=$this->UserModel->all();
+                    return view('posts.edit', compact('post','users'));
+                }
+                
+                return redirect()->back()->withErrors(['ID NOT CORRECT']);
             }
         
-            public function update(PostRequest $request,$id) {
+            // public function update(UpdatePostRequest $request,$id) {
+            public function update(Request $request,$id) {
+                $checkId=$this->postModel->check($id);
+                if($checkId){
+                    // dd( $request->all());
+                $post=$this->postModel->find($id);
                 $posts =$this->postModel->update($id,$request->all());  
                 return redirect()->route('Posts.index');
+            }
+            return redirect()->back()->withErrors(['ID NOT CORRECT']);
             }
 
             public function destroy($id)
