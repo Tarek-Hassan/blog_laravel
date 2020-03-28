@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPostTitle extends Migration
+class AddProviderToUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class AddPostTitle extends Migration
      */
     public function up()
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('describtion');
+        Schema::table('users', function (Blueprint $table) {
             //
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->longText('token')->nullable();
         });
     }
 
@@ -27,7 +28,7 @@ class AddPostTitle extends Migration
      */
     public function down()
     {
-        Schema::table('post', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

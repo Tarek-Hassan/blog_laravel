@@ -51,11 +51,11 @@
             @csrf
             <div class="form-group">
                 {{--dd(auth()->user()->id)--}}
-                <!-- <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />
-                <input type="hidden" name="post_id" value="{{$posts->id}}" /> -->
+                <!-- <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />-->
+                <input type="hidden" name="post_id" value="{{$posts->id}}" /> 
                  <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />
-                <input type="hidden" name="commentable_id" value="{{$posts->id}}" />
-                <input type="hidden" name="commentable_type" value="" />
+                <!-- <input type="hidden" name="commentable_id" value="{{$posts->id}}" />
+                <input type="hidden" name="commentable_type" value="" /> -->
                 <input type="text" class="form-control" id="content" placeholder="Enter Comment" name="content">
             </div>
             <button type="submit" class="btn btn-success">Create</button>

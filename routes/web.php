@@ -12,12 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-Route::get('/', 'HomeController@index')->name('home');
 Route::prefix('/posts')->middleware(['auth',])->group(function(){
 Route::get('', 'PostController@index')->name('Posts.index');
 Route::get('/create', 'PostController@create')->name("posts.create");
@@ -27,8 +25,14 @@ Route::get('/{post}/edit', 'PostController@edit')->name("posts.edit");
 Route::put('/{post}', 'PostController@update')->name("posts.update");
 Route::delete('/{post}', 'PostController@destroy')->name("posts.destroy");
 });
+Route::get('/home', 'HomeController@index')->name('home');
 
 // toStoreComments
+Route::post('/comment', 'PostController@commentStore')->name("comments.store")->middleware('auth');
+// github
+Route::get('login/{provider}', 'SocialController@redirectToProvider');
+Route::get('login/{provider}/callback', 'SocialController@handleProviderCallback');
 
-    Route::post('/comment', 'PostController@commentStore')->name("comments.store")->middleware('auth');
-
+// // 
+// Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+// Route::get('/callback/{provider}', 'SocialController@callback');

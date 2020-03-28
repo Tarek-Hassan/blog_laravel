@@ -24,10 +24,10 @@ class PostController extends Controller {
 
     public function index() {
         //NumberOfElementPerPage
-
+        // dd("ddddddd");
         $limit=10;
         $posts=$this->postModel->paginateAll($limit);
-        return view('posts.index', compact('posts', 'current', 'current1'));
+        return view('posts.index', compact('posts'));
     }
 
     public function show($id) {
@@ -78,10 +78,12 @@ class PostController extends Controller {
     }
     // this Method To Store Comments
     public function commentStore(StoreCommentRequest $request) {
-        $request['commentable_type']='App\Post';
-        $post=$this->postModel->find($request->commentable_id);
-        $comment=Comment::create($request->all());
-        $post->comments()->save($comment);
+        // $request['commentable_type']='App\Post';
+        $post=$this->postModel->find($request->post_id);
+        // dd($post);
+        $post->comments()->create($request->all());
+        // $comment=Comment::create($request->all());
+        // $post->comments()->save($comment);
         return redirect()->back();
     }
 }
