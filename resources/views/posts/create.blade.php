@@ -11,9 +11,13 @@
     </div>
 @endif
   <h2>PostDetails</h2>
-  <form method="POST" action="{{route('posts.store')}}">
+  <form method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
    
   @csrf
+  <div class="form-group">
+      <label for="img">img</label>
+      <input type="file" class="form-control" id="img" placeholder="Enter img" name="img">
+    </div>
   <div class="form-group">
       <label for="title">title</label>
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">

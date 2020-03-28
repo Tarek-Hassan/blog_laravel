@@ -25,5 +25,10 @@ Route::get('/{post}', 'PostController@show')->name("posts.show");
 Route::get('/{post}/edit', 'PostController@edit')->name("posts.edit");
 Route::put('/{post}', 'PostController@update')->name("posts.update");
 Route::delete('/{post}', 'PostController@destroy')->name("posts.destroy");
-Route::get('/home', 'HomeController@index')->name('home');
 });
+
+// toStoreComments
+Route::prefix('/')->middleware(['auth',])->group(function(){
+    Route::post('', 'PostController@commentStore')->name("comments.store");
+});
+Route::get('/', 'HomeController@index')->name('home');

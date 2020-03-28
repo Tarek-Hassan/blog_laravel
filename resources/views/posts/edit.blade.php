@@ -11,9 +11,18 @@
     </div>
 @endif
   <h2>UpdatePost</h2>
-  <form method="POST" action="{{route('posts.update',$post->id)}}">
+  <form method="POST" action="{{route('posts.update',$post->id)}}" enctype="multipart/form-data" >
   @csrf
   @method('put')
+  <div class="form-group">
+      <label for="title">PostImage</label><br/>
+      <img width="100px" alt="{{$post->title}}" height="100px" src="{{$post->img ? asset('storage/'.$post->img):''}} "/>
+    </div>
+    <div class="form-group">
+      <label for="img">UPloadImage</label>
+      <input type="file" class="form-control" id="img" placeholder="Enter img" name="img">
+      <input type="hidden" class="form-control" id="img" value="{{$post->img}}" placeholder="Enter img" name="oldimg">
+    </div>
   <div class="form-group">
       <label for="title">title</label>
       <input type="text" class="form-control" id="title" value="{{$post->title}}" name="title">

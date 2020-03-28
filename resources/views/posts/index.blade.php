@@ -17,11 +17,13 @@
     <thead>
       <tr>
         <th>id</th>
+        <th>Image</th>
         <th>title</th>
         <th>slug</th>
         <th>describtion</th>
         <th>user</th>
         <th>createdAt</th>
+        <th >Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +31,7 @@
     @foreach($posts as $post)
       <tr>
         <td>{{$post->id}}</td>
+        <td><img width="50px" height="50px" src="{{$post->img ? asset('storage/'.$post->img):''}} "/></td>
         <td>{{$post->title}}</td>
         <td>{{$post->slug}}</td>
         <td>{{$post->describtion}}</td>

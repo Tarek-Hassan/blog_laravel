@@ -24,7 +24,9 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-                'title' => 'required|min:3|unique:post,title,'.$this->user()->id,
+                // 'title' => 'required|min:3|unique:post,title,'.$this->user()->id,
+                'title' => 'required|min:3',
+                'img' => 'image|mimes:png,jpg,jpeg|max:2048',
                 'describtion' => 'required|min:10',
                 'user_id' => 'required|exists:users,id',
         ];
@@ -35,7 +37,7 @@ class UpdatePostRequest extends FormRequest
         'title.min'=>'TITLE SHOULD BE MORE THAN  3  CHAR',
         'title.required'=>'TITLE IS REQUIRED (NOT EMPTY)',
         'title.unique'=>'TITLE SHOULD BE UNIQUE',
-        'title.unique'=>'TITLE SHOULD BE UNIQUE',
+        'user_id.exists'=>'USER_ID NOT EXSIST',
         'describtion.required'=>'CONTENT IS REQUIRED (NOT EMPTY)',
         'describtion.min'=>'CONTENT SHOULD BE MORE THAN  10  CHAR',
 
