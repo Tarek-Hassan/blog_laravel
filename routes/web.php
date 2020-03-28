@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
 Route::prefix('/posts')->middleware(['auth',])->group(function(){
 Route::get('', 'PostController@index')->name('Posts.index');
 Route::get('/create', 'PostController@create')->name("posts.create");
@@ -28,7 +29,6 @@ Route::delete('/{post}', 'PostController@destroy')->name("posts.destroy");
 });
 
 // toStoreComments
-Route::prefix('/')->middleware(['auth',])->group(function(){
-    Route::post('', 'PostController@commentStore')->name("comments.store");
-});
-Route::get('/', 'HomeController@index')->name('home');
+
+    Route::post('/comment', 'PostController@commentStore')->name("comments.store");
+
