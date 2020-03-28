@@ -30,5 +30,5 @@ Route::delete('/{post}', 'PostController@destroy')->name("posts.destroy");
 
 // toStoreComments
 
-    Route::post('/comment', 'PostController@commentStore')->name("comments.store");
+    Route::post('/comment', 'PostController@commentStore')->name("comments.store")->middleware('auth');
 
