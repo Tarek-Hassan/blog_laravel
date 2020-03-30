@@ -24,15 +24,11 @@ Route::get('/{post}', 'PostController@show')->name("posts.show");
 Route::get('/{post}/edit', 'PostController@edit')->name("posts.edit");
 Route::put('/{post}', 'PostController@update')->name("posts.update");
 Route::delete('/{post}', 'PostController@destroy')->name("posts.destroy");
+// toStoreComments
+Route::post('/{post}/comments', 'CommentController@store')->name("posts.comments.store");
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
-// toStoreComments
-Route::post('/comment', 'PostController@commentStore')->name("comments.store")->middleware('auth');
 // github
 Route::get('login/{provider}', 'SocialController@redirectToProvider');
 Route::get('login/{provider}/callback', 'SocialController@handleProviderCallback');
-
-// // 
-// Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-// Route::get('/callback/{provider}', 'SocialController@callback');

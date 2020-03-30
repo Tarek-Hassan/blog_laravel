@@ -47,15 +47,10 @@
         <div class="card-header  text-info">
             <h2>AddComment</h2>
         </div>
-        <form method="POST" action="{{route('comments.store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('posts.comments.store',$posts->id)}}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                {{--dd(auth()->user()->id)--}}
-                <!-- <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />-->
-                <input type="hidden" name="post_id" value="{{$posts->id}}" /> 
                  <input type="hidden" name="user_id" value="{{auth()->user()->id}}" />
-                <!-- <input type="hidden" name="commentable_id" value="{{$posts->id}}" />
-                <input type="hidden" name="commentable_type" value="" /> -->
                 <input type="text" class="form-control" id="content" placeholder="Enter Comment" name="content">
             </div>
             <button type="submit" class="btn btn-success">Create</button>

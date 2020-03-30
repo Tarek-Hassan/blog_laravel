@@ -76,14 +76,4 @@ class PostController extends Controller {
         $posts=$this->postModel->delete($id);
         return redirect()->back('Posts.index');
     }
-    // this Method To Store Comments
-    public function commentStore(StoreCommentRequest $request) {
-        // $request['commentable_type']='App\Post';
-        $post=$this->postModel->find($request->post_id);
-        // dd($post);
-        $post->comments()->create($request->all());
-        // $comment=Comment::create($request->all());
-        // $post->comments()->save($comment);
-        return redirect()->back();
-    }
 }
